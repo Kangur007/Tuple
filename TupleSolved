@@ -1,0 +1,34 @@
+public static IList(DateTime Start, DateTime End) CreateRanges(IList<DateTime> dateTimes)
+
+{
+    if (dateTimes == null) throw new ArgumentException(nameof(dateTimes));
+
+    List<(DateTime Start, DateTime End)> ranges = new();
+
+    if (dateTimes.Length == 0) return ranges;
+
+    (DateTime Start, DateTime End) range = (dateTimes[0], dateTimes[0])
+
+    ranges.Add(range)
+
+    foreach (var dateTime in dateTimes)
+
+    {
+    	var difference = dateTime - range;
+
+    	if (difference.Days <= 1)
+    	{
+    		range.end = dateTime;
+    	}
+
+    	else
+
+    	{	   
+    		range = (dateTime, dateTime)
+
+    		ranges.Add(range)
+    	}
+    }
+    return ranges;
+}
+
