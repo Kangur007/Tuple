@@ -1,0 +1,49 @@
+ class Program
+    {
+        static void Main(string[] args)
+        {
+
+            var input1 = new List<DateTime>()
+            {
+
+                new DateTime(2016, 6, 20), new DateTime(2016, 6, 21), new DateTime(2016, 6, 22),
+
+                new DateTime(2016, 6, 25), new DateTime(2016, 6, 26)
+            };
+
+            
+            
+        }
+
+        public List<Tuple<DateTime, DateTime>> Solve(List<DateTime> array)
+        {
+
+
+            if (array.Count == 1)
+                return new List<Tuple<DateTime, DateTime>>()
+                {
+                    new Tuple<DateTime, DateTime>(
+                        new DateTime(array[0]),
+                        new DateTime(array[0])
+                        )
+                };
+            List<Tuple<DateTime, DateTime>> ranges = new();
+
+            DateTime rangeStart = array[0];
+            for(int i = 1; i <array.Length; i++)
+            {
+                if(array[i-1].TotalDays + 1 != array[i].TotalDays)
+                {
+                    ranges.Add(
+                        new Tuple<DateTime, DateTime>(
+                            new DateTime(rangeStart),
+                            new DateTime(array[i - 1])
+                            )
+                        );
+                    rangeStart = array[i];
+                }
+            }
+            return ranges;
+        }
+
+    }
